@@ -41,10 +41,10 @@ public class AuthController {
     }
 
 
-    @GetMapping("/test")
-    public ResponseEntity<MessageResponse> test() {
-        return ResponseEntity.ok(new MessageResponse("test"));
-    }
+//    @GetMapping("/test")
+//    public ResponseEntity<MessageResponse> test() {
+//        return ResponseEntity.ok(new MessageResponse("test"));
+//    }
 
     @PostMapping("/register/email")
     public ResponseEntity<?> registerUserByEmail(@Valid @RequestBody UserRegistrationRequest registrationRequest) {
