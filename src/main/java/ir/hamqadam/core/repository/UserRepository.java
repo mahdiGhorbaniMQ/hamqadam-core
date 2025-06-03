@@ -4,6 +4,8 @@ import ir.hamqadam.core.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,6 +21,15 @@ public interface UserRepository extends MongoRepository<User, String> {
      * @return An Optional containing the user if found, or an empty Optional otherwise.
      */
     Optional<User> findByEmail(String email);
+
+    /**
+     * Finds a user by their email address or telegram id.
+     *
+     * @param telegramIdOrEmail The email address or telegramId to search for.
+     * @return An Optional containing the user if found, or an empty Optional otherwise.
+     */
+    @Query("{ '$or': [ { 'email': ?0 }, { 'telegramId': ?0 } ] }")
+    Optional<User> findByEmailOrTelegramId(@Param("value") String telegramIdOrEmail);
 
     /**
      * Finds a user by their Telegram ID.

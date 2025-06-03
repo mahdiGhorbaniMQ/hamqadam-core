@@ -34,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
         // Assuming users can log in with either username or email.
         // Adjust the query if your User entity has a separate username field.
-        User user = userRepository.findByEmail(usernameOrEmail) // Or findByUsernameOrEmail if you have that
+        User user = userRepository.findByEmailOrTelegramId(usernameOrEmail) // Or findByUsernameOrEmail if you have that
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with username or email: " + usernameOrEmail)
                 );
