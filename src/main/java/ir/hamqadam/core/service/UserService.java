@@ -51,6 +51,14 @@ public interface UserService  { // Extending UserDetailsService for Spring Secur
     Optional<User> findUserByEmail(String email);
 
     /**
+     * Finds a user by their email or telegramId.
+     *
+     * @param emailOrTelegramId The email or telegram id of the user.
+     * @return An Optional containing the user if found.
+     */
+    Optional<User> findUserByEmailOrTelegramId(String emailOrTelegramId);
+
+    /**
      * Finds a user by their Telegram ID.
      *
      * @param telegramId The Telegram ID of the user.

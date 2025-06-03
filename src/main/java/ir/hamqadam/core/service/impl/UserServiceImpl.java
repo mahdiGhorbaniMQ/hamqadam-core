@@ -140,6 +140,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
+    public Optional<User> findUserByEmailOrTelegramId(String emailOrTelegramId) {
+        return userRepository.findByEmailOrTelegramId(emailOrTelegramId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Optional<User> findUserByTelegramId(String telegramId) {
         return userRepository.findByTelegramId(telegramId);
     }

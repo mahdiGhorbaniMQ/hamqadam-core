@@ -53,13 +53,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         // For a very basic setup, you might give a default role to all authenticated users:
         authorities.add(new SimpleGrantedAuthority("ROLE_USER")); // Placeholder - customize this
 
-        System.out.println(usernameOrEmail);
-        System.out.printf(user.getPasswordHash());
-        System.out.printf(authorities.toString());
-        System.out.printf(user.getAccountStatus().toString());
+
         return new org.springframework.security.core.userdetails.User(
                 usernameOrEmail, // Or user.getUsername() if you have one
-                user.getPasswordHash(),
+                Objects.nonNull(user.getPasswordHash())? user.getPasswordHash() : "",
                 user.getAccountStatus().toString().equalsIgnoreCase("active"), // enabled
                 true, // accountNonExpired
                 true, // credentialsNonExpired

@@ -47,7 +47,7 @@ public class UserController {
     @GetMapping("/me")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<UserResponseDTO> getCurrentUserProfile(@AuthenticationPrincipal UserDetails currentUserDetails) {
-        User user = userService.findUserByEmail(currentUserDetails.getUsername())
+        User user = userService.findUserByEmailOrTelegramId(currentUserDetails.getUsername())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "email", currentUserDetails.getUsername()));
         // UserResponseDTO userResponseDTO = modelMapper.map(user, UserResponseDTO.class);
         UserResponseDTO userResponseDTO = convertToUserResponseDTO(user, true); // true for self-view (more details)
