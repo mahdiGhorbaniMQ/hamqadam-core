@@ -51,7 +51,7 @@ public class PostController {
     public ResponseEntity<PostResponseDTO> createPost(
             @Valid @RequestBody PostCreationRequestDTO creationRequest,
             @AuthenticationPrincipal UserDetails currentUserDetails) {
-        User actingUser = userService.findUserByEmail(currentUserDetails.getUsername())
+        User actingUser = userService.findUserByEmailOrTelegramId(currentUserDetails.getUsername())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "email", currentUserDetails.getUsername()));
 
         Post.AuthorInfo authorInfoModel = new Post.AuthorInfo(
