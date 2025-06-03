@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 // Import other necessary collections if User model has roles/permissions directly
 // For Phase 1, roles might be simple strings or an enum.
@@ -53,7 +54,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         authorities.add(new SimpleGrantedAuthority("ROLE_USER")); // Placeholder - customize this
 
         return new org.springframework.security.core.userdetails.User(
-                user.getEmail(), // Or user.getUsername() if you have one
+                usernameOrEmail, // Or user.getUsername() if you have one
                 user.getPasswordHash(),
                 user.getAccountStatus().toString().equalsIgnoreCase("active"), // enabled
                 true, // accountNonExpired
